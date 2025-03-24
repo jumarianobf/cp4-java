@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sistema de Prontuário Médico">
+  <title>Início - Sistema de Prontuário</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .form-container {
+        max-width: 500px;
+        padding: 1rem;
+        margin: 0 auto;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .btn-action {
+        margin-top: 10px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h2>Sistema de Prontuário Médico</h2>
+    <p class="lead" th:text="${loggedAs}">Médico: Dr. Nome</p>
+  </div>
+
+  <div class="form-container">
+    <div class="card">
+      <div class="card-header">
+        <h5>Novo Atendimento</h5>
+      </div>
+      <div class="card-body">
+        <p>Inicie um novo atendimento informando o CPF do paciente.</p>
+        <form action="#" th:action="@{/consultation/start}" th:object="${patientLazy}" method="post">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.456.789-10" th:field="*{cpf}" required>
+            <label for="cpf">CPF do paciente</label>
+          </div>
+          <button class="btn btn-primary w-100 btn-action" type="submit">Iniciar Atendimento</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5>Consultar Atendimentos</h5>
+      </div>
+      <div class="card-body">
+        <p>Visualize todos os atendimentos realizados.</p>
+        <a href="/medical-record/list" class="btn btn-secondary w-100 btn-action">Listar Atendimentos</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <p class="mb-1">&copy; 2024 Sistema de Prontuário</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacidade</a></li>
+      <li class="list-inline-item"><a href="#">Termos</a></li>
+      <li class="list-inline-item"><a href="#">Suporte</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>
+
