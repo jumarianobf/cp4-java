@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sistema de Prontuário Médico">
+    <title>Prontuário Médico</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <h2>Prontuário Médico</h2>
+            <p class="lead" th:text="${patient.cpf + ' - ' + patient.name}">CPF - NOME</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-12">
+                <h4 class="mb-3">Histórico Médico</h4>
+                <div class="col-sm-12 mb-4">
+                    <textarea class="form-control" id="medicalHistory" rows="5" readonly th:text="${medicalHistory}"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-12">
+                <h4 class="mb-3">Novo Registro Médico</h4>
+                <form action="#" th:action="@{/medical-record/save}" th:object="${medicalRecord}" method="post">
+                    <input type="hidden" name="patient" th:value="${patient.id}" />
+
+                    <div class="col-sm-12 mb-3">
+                        <label for="anamnesis" class="form-label">Anamnese</label>
+                        <textarea class="form-control" id="anamnesis" name="anamnesis" rows="5"></textarea>
+                    </div>
+
+                    <div class="col-sm-12 mb-3">
+                        <label for="prescription" class="form-label">Prescrição</label>
+                        <textarea class="form-control" id="prescription" name="prescription" rows="5"></textarea>
+                    </div>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Finalizar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">&copy; 2024 Sistema de Prontuário</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacidade</a></li>
+            <li class="list-inline-item"><a href="#">Termos</a></li>
+            <li class="list-inline-item"><a href="#">Suporte</a></li>
+        </ul>
+    </footer>
+</div>
+</body>
+</html>
+

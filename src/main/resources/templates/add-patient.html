@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sistema de Prontuário Médico">
+    <title>Cadastro de Paciente</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <h2>Novo Paciente</h2>
+            <p class="lead">Este é um novo paciente, cadastre para iniciar o atendimento.</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-12">
+                <h4 class="mb-3">Dados Pessoais</h4>
+                <form th:action="@{/patient/save}" th:object="${patient}" method="post">
+                    <div class="col-sm-12 mb-3">
+                        <label for="name" class="form-label">Nome completo</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Nome completo é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mb-3">
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" th:field="*{cpf}" placeholder="123.456.789-10" required>
+                        <div class="invalid-feedback">
+                            CPF válido é obrigatório.
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">&copy; 2024 Sistema de Prontuário</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacidade</a></li>
+            <li class="list-inline-item"><a href="#">Termos</a></li>
+            <li class="list-inline-item"><a href="#">Suporte</a></li>
+        </ul>
+    </footer>
+</div>
+</body>
+</html>
+
