@@ -1,8 +1,8 @@
 # 2TDSPS - 2024	Java Advanced
 
 ## Entrega CP4 
-### RM552713
-### RM553383
+### Julia Mariano - RM552713
+### Leonardo Gaspar Saheb - RM553383
 
 ## Week 1 
 
