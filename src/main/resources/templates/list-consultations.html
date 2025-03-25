@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sistema de Prontuário Médico">
+    <title>Lista de Atendimentos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h2>Lista de Atendimentos</h2>
+        <p class="lead" th:text="${loggedAs}">Médico: Dr. Nome</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Histórico de Atendimentos</h5>
+                    <a href="/home" class="btn btn-primary btn-sm">Voltar</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Paciente</th>
+                                <th>CPF</th>
+                                <th>Médico</th>
+                                <th>Anamnese</th>
+                                <th>Prescrição</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${records.empty}">
+                                <td colspan="6" class="text-center">Nenhum atendimento registrado</td>
+                            </tr>
+                            <tr th:each="record : ${records}">
+                                <td th:text="${#temporals.format(record.recordDate, 'dd/MM/yyyy HH:mm')}">01/01/2024 10:00</td>
+                                <td th:text="${record.patient.name}">Nome do Paciente</td>
+                                <td th:text="${record.patient.cpf}">123.456.789-10</td>
+                                <td th:text="${record.doctorName}">Dr. Nome</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            th:data-bs-target="'#anamneseCollapse' + ${record.id}"
+                                            aria-expanded="false">
+                                        Ver
+                                    </button>
+                                    <div class="collapse mt-2" th:id="'anamneseCollapse' + ${record.id}">
+                                        <div class="card card-body">
+                                            <p th:text="${record.anamnesis}">Anamnese</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            th:data-bs-target="'#prescricaoCollapse' + ${record.id}"
+                                            aria-expanded="false">
+                                        Ver
+                                    </button>
+                                    <div class="collapse mt-2" th:id="'prescricaoCollapse' + ${record.id}">
+                                        <div class="card card-body">
+                                            <p th:text="${record.prescription}">Prescrição</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">&copy; 2024 Sistema de Prontuário</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacidade</a></li>
+            <li class="list-inline-item"><a href="#">Termos</a></li>
+            <li class="list-inline-item"><a href="#">Suporte</a></li>
+        </ul>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
